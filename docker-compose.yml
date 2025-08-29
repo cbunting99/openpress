@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  webserver:
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./logs:/var/log/nginx
+      - ./ssl:/ssl
+      - ./letsencrypt:/etc/letsencrypt
+    environment:
+      - DOMAIN=yourdomain.com
+      - EMAIL=admin@yourdomain.com
+    networks:
+      - webnet
+    restart: unless-stopped
+    depends_on:
+      - php-fpm
+      - mysql
+
+  php-fpm:
+    image: php:8.2-fpm-alpine
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - webnet
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - webnet
+    restart: unless-stopped
+
+  fail2ban:
+    image: crazymax/fail2ban:latest
+    volumes:
+      - ./logs:/var/log/nginx:ro
+      - ./fail2ban:/data
+    networks:
+      - webnet
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  webnet:
+    driver: bridge
