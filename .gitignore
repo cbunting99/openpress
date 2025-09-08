@@ -36,3 +36,6 @@ Thumbs.db
 # Temporary files
 tmp/
 temp/
+sqlitedb/ai-memory.db-wal
+sqlitedb/ai-memory.db
+sqlitedb/ai-memory.db-shm

@@ -58,7 +58,6 @@ RUN git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git /tmp
 
 # Copy configurations
 COPY nginx/nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
-COPY nginx/conf.d/ /usr/local/openresty/nginx/conf/conf.d/
 COPY nginx/sites-available/ /usr/local/openresty/nginx/conf/sites-available/
 COPY nginx/sites-enabled/ /usr/local/openresty/nginx/conf/sites-enabled/
 COPY modsecurity/ /etc/modsecurity/
