@@ -6,6 +6,9 @@ RUN apk add --no-cache \
     wget \
     git \
     build-base \
+    autoconf \
+    automake \
+    libtool \
     openssl-dev \
     pcre-dev \
     zlib-dev \
@@ -38,6 +41,7 @@ RUN git clone --depth 1 -b v3/master https://github.com/SpiderLabs/ModSecurity.g
     && git submodule init \
     && git submodule update \
     && ./build.sh \
+    && ./autogen.sh \
     && ./configure \
     && make \
     && make install \
