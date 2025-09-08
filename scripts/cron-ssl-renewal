@@ -1,5 +1,0 @@
-# Cron job for SSL renewal
-# Add this to your crontab: crontab -e
-# 0 12 * * * /scripts/renew-ssl.sh
-
-# This will run daily at noon to check and renew SSL certificates
