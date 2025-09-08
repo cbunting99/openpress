@@ -16,7 +16,6 @@ RUN apk add --no-cache \
     geoip-dev \
     libmaxminddb-dev \
     yajl-dev \
-    ssdeep-dev \
     lua-resty-core \
     lua-resty-lrucache \
     php82 \
